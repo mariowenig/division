@@ -1,70 +1,32 @@
 <?php
-
 //Author: Mario Wenig
 //Date: 10/24/2016
+
+//Division class
+require_once('division.php');
+
+
+
+
+$t = division::div_odd("6", 3, 1);
+var_dump($t);
+
+
+$t = division::div_odd("913", 11, 1);
+var_dump($t);
+$t = division::div_odd("689", 53, 1);
+var_dump($t);
+$t = division::div_odd("3991300698", 17, 1);
+var_dump($t);
+
+
+
 
 
 /**
  * Shortening rule used in most cases to prevent lenghenting of string rather
  * than shortening it.
  */
-
-
-//General rule
-
-var_dump(div("913", 11, 1));
-
-var_dump(div("689", 53, 1));
-
-var_dump(div("3991300698", 17, 1));
-
-
-// m = (D * f + 1)
-// mq + t
-
-function div($string, $D, $debug = false) {
-	
-	$f = null; // Factor
-	$m = null;
-	$t = null;
-	
-	//Resolve q
-	$q = last_x($string, 1);
-	//Resolve t
-	$t = substr($string, 0, strlen($string)-1);
-	
-	
-	$div_by_last = last_x($D, 1);
-	
-	switch($div_by_last) {
-		case 1: $f = 9; break;
-		case 3: $f = 3; break;
-		case 7: $f = 7; break;
-		case 9: $f = 1; break;
-		default: $f = null; break;
-	}
-	
-	//Resolve m
-	$m = (($D * $f) + 1)/10;
-	
-	$res = ($m * $q) + $t;	
-	if($debug) {
-		var_dump("D: ".$D);
-		var_dump("Q: ".$q);
-		var_dump("M: ".$m);
-		var_dump("T: ".$t);
-		var_dump("R: ".$res);
-	}
-	
-	if(strlen($res) > strlen($D)+1) {
-		$result = div($res, $D, $debug);
-	}
-	else {
-		$result = mod($res, $D);
-	}
-	return $result;
-}
-
 
 
 //Division by 3 rule
